@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tonton - ViuNime — ViuNime</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg vn-navbar sticky-top py-3" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand vn-brand" href="index.html"><i class="fas fa-play-circle me-2"></i>ViuNime</a>
+    <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"><i class="fas fa-bars"></i></button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link vn-nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-th me-1"></i>Genre</a>
+          <ul class="dropdown-menu dropdown-menu-dark border-0" style="background:#0e1420;border:1px solid rgba(255,255,255,.08)!important;border-radius:12px;">
+            
+            <li><a class="dropdown-item py-2" href="genre-action.html"><i class="fas fa-fist-raised me-2 text-danger"></i>Action</a></li>
+            <li><a class="dropdown-item py-2" href="genre-romance.html"><i class="fas fa-heart me-2" style="color:#ff6b9d"></i>Romance</a></li>
+            <li><a class="dropdown-item py-2" href="genre-fantasy.html"><i class="fas fa-magic me-2 text-primary"></i>Fantasy</a></li>
+            <li><a class="dropdown-item py-2" href="genre-horror.html"><i class="fas fa-ghost me-2 text-secondary"></i>Horror</a></li>
+            <li><a class="dropdown-item py-2" href="genre-school.html"><i class="fas fa-graduation-cap me-2 text-success"></i>School</a></li>
+            <li><a class="dropdown-item py-2" href="genre-game.html"><i class="fas fa-gamepad me-2 text-info"></i>Game</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link vn-nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-book-open me-1"></i>Komik</a>
+          <ul class="dropdown-menu dropdown-menu-dark border-0" style="background:#0e1420;border:1px solid rgba(255,255,255,.08)!important;border-radius:12px;">
+            <li><a class="dropdown-item py-2" href="#">Manhwa</a></li>
+            <li><a class="dropdown-item py-2" href="#">Manga</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="d-flex align-items-center gap-2 mt-2 mt-lg-0">
+        <a href="index.html" class="vn-btn-back" id="btnBack"><i class="fas fa-arrow-left"></i> <span id="backText">Kembali</span></a>
+        <a href="index.html" class="vn-btn-back"><i class="fas fa-home"></i> Home</a>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="container py-4" style="margin-top:10px">
+  <div class="row g-4">
+    <div class="col-12">
+      <div class="vn-video-wrapper mb-3">
+        <button class="vn-fs-btn" id="fullscreenBtn" title="Fullscreen (F)"><i class="fas fa-expand"></i></button>
+        <video class="vn-video" controls preload="metadata" id="mainVideo">
+          <source src="" type="video/mp4" id="videoSource">
+        </video>
+      </div>
+      <div class="vn-info-box mb-3">
+        <div class="d-flex flex-wrap align-items-start justify-content-between gap-3">
+          <div>
+            <h1 class="fw-bold mb-1" id="animeTitle" style="font-size:clamp(1.3rem,3vw,2rem)">Loading...</h1>
+            <div class="d-flex flex-wrap gap-3 text-white-50 small mb-2">
+              <span><i class="fas fa-play-circle me-1 text-info"></i><span id="infoEp">Episode 1</span></span>
+              <span><i class="fas fa-star me-1 text-warning"></i><span id="animeRating">—</span></span>
+              <span><i class="fas fa-clock me-1"></i><span id="animeDuration">—</span></span>
+              <span><i class="fas fa-calendar me-1"></i><span id="animeYear">—</span></span>
+            </div>
+            <p class="mb-0 text-white-50 small" id="animeDesc" style="max-width:700px"></p>
+          </div>
+          <div class="d-flex gap-2 flex-shrink-0">
+            <a href="#" class="vn-ep-nav-btn disabled" id="prevEpBtn"><i class="fas fa-step-backward"></i> Prev</a>
+            <a href="#" class="vn-ep-nav-btn disabled" id="nextEpBtn">Next <i class="fas fa-step-forward"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="vn-info-box">
+        <div class="d-flex align-items-center gap-2 mb-3">
+          <i class="fas fa-list-ol" style="color:var(--vn-teal)"></i>
+          <span class="fw-bold" id="epCountTitle">Daftar Episode</span>
+        </div>
+        <div class="vn-ep-grid" id="episodeGrid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- ═══ MUSIC PLAYER ═══ -->
+  <audio id="bgMusic" preload="none"></audio>
+  <div class="vn-music-popup" id="musicPopup">
+    <div class="vn-music-header">
+      <div class="d-flex align-items-center gap-2">
+        <i class="fas fa-music" style="color:var(--vn-teal)"></i>
+        <span class="fw-bold">Music Player</span>
+      </div>
+      <button class="vn-music-close" id="musicClose"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="vn-music-body">
+      <div class="vn-player-card">
+        <div class="vn-cover" id="coverWrap">
+          <i class="fas fa-music" id="coverIcon"></i>
+          <img id="coverImg" alt="" style="display:none">
+        </div>
+        <div class="vn-song-title" id="musicTitleEl">Pilih lagu dari daftar</div>
+        <div class="vn-song-artist" id="musicArtistEl">—</div>
+        <div class="vn-ctrl">
+          <button class="vn-ctrl-btn" id="prevMusicBtn"><i class="fas fa-step-backward"></i></button>
+          <button class="vn-ctrl-btn play" id="playPauseBtn"><i class="fas fa-play"></i></button>
+          <button class="vn-ctrl-btn" id="nextMusicBtn"><i class="fas fa-step-forward"></i></button>
+        </div>
+        <div class="vn-progress-wrap" id="musicProgressBar">
+          <div class="vn-progress-fill" id="musicProgressFill"></div>
+        </div>
+        <div class="vn-time">
+          <span id="musicCurrentTime">0:00</span>
+          <span id="musicDuration">0:00</span>
+        </div>
+      </div>
+      <div class="fw-bold mb-2" style="font-size:.9rem">
+        <i class="fas fa-list me-2" style="color:var(--vn-teal)"></i>Daftar Lagu
+      </div>
+      <div id="playlistContainer"></div>
+    </div>
+  </div>
+  <button class="vn-music-btn" id="musicToggleBtn">
+    <i class="fas fa-music" id="toggleIcon"></i>
+    <span class="lbl" id="toggleLabel">Music</span>
+  </button>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="playlist.js"></script>
+  <script src="music-player.js"></script>
+<script>
+const animeDB = {
+  'oshi-no-ko':     {title:'Oshi No Ko',       episodes:11, rating:'9.2', duration:'90 menit', year:'2023', desc:'Aqua dan Ruby berjuang menjadi bintang untuk membalas dendam atas kematian ibu mereka.', src:'videos/oshi-no-ko/',     thumb:'https://cdn.myanimelist.net/images/anime/1812/134736.jpg'},
+  'jigokuraku':     {title:'Jigokuraku',        episodes:13, rating:'9.8', duration:'24 menit', year:'2023', desc:'Gabimaru dikirim ke pulau misterius untuk mencari ramuan keabadian.',                     src:'videos/jigokuraku/',      thumb:'https://cdn.myanimelist.net/images/anime/1452/137388.jpg'},
+  'dark-gathering': {title:'Dark Gathering',    episodes:25, rating:'9.0', duration:'24 menit', year:'2023', desc:'Keitaro membantu gadis misterius berburu roh jahat.',                                     src:'videos/dark-gathering/',  thumb:'https://cdn.myanimelist.net/images/anime/1496/134355.jpg'},
+  'kenka-bancho':   {title:'Kenka Dokugaku',    episodes:12, rating:'8.9', duration:'24 menit', year:'2023', desc:'Yuuji belajar seni bela diri keras dari tutorial video.',                                 src:'videos/kenka-bancho/',    thumb:'https://cdn.myanimelist.net/images/anime/1722/140483.jpg'},
+  'kimetsu':        {title:'Kimetsu no Yaiba',  episodes:26, rating:'9.1', duration:'24 menit', year:'2019', desc:'Tanjiro berjuang menjadi pemburu iblis untuk mengobati adiknya.',                         src:'videos/kimetsu/',         thumb:'https://cdn.myanimelist.net/images/anime/1286/99889.jpg'},
+  'soekano':        {title:'Soekano Movie',     episodes:1,  rating:'8.8', duration:'90 menit', year:'2022', desc:'Film spesial dari seri Rent-a-Girlfriend.',                                               src:'videos/soekano/',         thumb:'https://cdn.myanimelist.net/images/anime/1440/93480.jpg'},
+  'jujutsu-kaisen': {title:'Jujutsu Kaisen',    episodes:24, rating:'9.1', duration:'24 menit', year:'2020', desc:'Yuji Itadori terlibat dunia kutukan setelah menelan jari Ryomen Sukuna.',                 src:'videos/jujutsu-kaisen/',  thumb:'https://cdn.myanimelist.net/images/anime/1171/109222.jpg'},
+  'demon-slayer':   {title:'Demon Slayer',      episodes:26, rating:'9.5', duration:'24 menit', year:'2019', desc:'Tanjiro Kamado berjuang menjadi pemburu iblis.',                                          src:'videos/demon-slayer/',    thumb:'https://cdn.myanimelist.net/images/anime/1286/99889.jpg'},
+  'attack-on-titan':{title:'Attack on Titan',  episodes:87, rating:'9.8', duration:'24 menit', year:'2013', desc:'Manusia bertahan hidup dari serangan Titan di balik tembok raksasa.',                     src:'videos/attack-on-titan/', thumb:'https://cdn.myanimelist.net/images/anime/10/78745.jpg'},
+};
+const params=new URLSearchParams(location.search);
+const animeId=params.get('anime')||'oshi-no-ko';
+const curEp=parseInt(params.get('ep')||1);
+const fromPage=params.get('from')||'home';
+const backMap={home:'index.html',popular:'index.html','genre-action':'genre-action.html','genre-romance':'genre-romance.html','genre-fantasy':'genre-fantasy.html','genre-horror':'genre-horror.html','genre-school':'genre-school.html','genre-game':'genre-game.html'};
+const backNameMap={home:'Home',popular:'Home','genre-action':'Action','genre-romance':'Romance','genre-fantasy':'Fantasy','genre-horror':'Horror','genre-school':'School','genre-game':'Game'};
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('btnBack').href=backMap[fromPage]||'index.html';
+  document.getElementById('backText').textContent=backNameMap[fromPage]||'Kembali';
+  const a=animeDB[animeId];
+  if(!a){document.getElementById('animeTitle').textContent='Anime tidak ditemukan';return;}
+  document.title=a.title+' Ep '+curEp+' — ViuNime';
+  document.getElementById('animeTitle').textContent=a.title;
+  document.getElementById('animeRating').textContent=a.rating+'/10';
+  document.getElementById('animeDuration').textContent=a.duration;
+  document.getElementById('animeYear').textContent=a.year;
+  document.getElementById('animeDesc').textContent=a.desc;
+  document.getElementById('infoEp').textContent='Episode '+curEp;
+  document.getElementById('epCountTitle').textContent='Daftar Episode ('+a.episodes+' Ep)';
+  const vid=document.getElementById('mainVideo');
+  document.getElementById('videoSource').src=a.src+'ep'+curEp+'.mp4';
+  vid.poster=a.thumb; vid.load();
+  const prevBtn=document.getElementById('prevEpBtn'),nextBtn=document.getElementById('nextEpBtn');
+  if(curEp>1){prevBtn.href='watch.html?anime='+animeId+'&ep='+(curEp-1)+'&from='+fromPage;prevBtn.classList.remove('disabled');}
+  if(curEp<a.episodes){nextBtn.href='watch.html?anime='+animeId+'&ep='+(curEp+1)+'&from='+fromPage;nextBtn.classList.remove('disabled');}
+  const grid=document.getElementById('episodeGrid');
+  for(let i=1;i<=a.episodes;i++){
+    const el=document.createElement('a');
+    el.href='watch.html?anime='+animeId+'&ep='+i+'&from='+fromPage;
+    el.className='vn-ep-item'+(i===curEp?' active':'');
+    el.innerHTML='<i class="fas fa-play d-block mb-1" style="font-size:.7rem;opacity:.6"></i>Ep '+i;
+    grid.appendChild(el);
+  }
+});
+const fsBtn=document.getElementById('fullscreenBtn'),vidWrap=document.querySelector('.vn-video-wrapper');
+fsBtn.addEventListener('click',()=>{if(!document.fullscreenElement){vidWrap.requestFullscreen();fsBtn.innerHTML='<i class="fas fa-compress"></i>';}else{document.exitFullscreen();fsBtn.innerHTML='<i class="fas fa-expand"></i>';}  });
+document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement)fsBtn.innerHTML='<i class="fas fa-expand"></i>';});
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT')return;
+  const a=animeDB[animeId];if(!a)return;
+  if(e.key==='f'||e.key==='F')fsBtn.click();
+  if(e.key==='ArrowLeft'&&curEp>1)location.href='watch.html?anime='+animeId+'&ep='+(curEp-1)+'&from='+fromPage;
+  if(e.key==='ArrowRight'&&curEp<a.episodes)location.href='watch.html?anime='+animeId+'&ep='+(curEp+1)+'&from='+fromPage;
+});
+window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',scrollY>50));
+</script>
+</body>
+</html>
